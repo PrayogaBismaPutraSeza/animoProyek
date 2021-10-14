@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "578508452952",
+    "project_id": "animo-95ac6",
+    "storage_bucket": "animo-95ac6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578508452952:android:c4610f1f700f722703062d",
+        "android_client_info": {
+          "package_name": "com.example.animo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578508452952-1lgo1o4o8uvu5hihqobcaofes1mphki9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkoeHz8uxH7bOZ0DyFQTa-2sKSgz9DM78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578508452952-1lgo1o4o8uvu5hihqobcaofes1mphki9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
