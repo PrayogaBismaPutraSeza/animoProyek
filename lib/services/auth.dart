@@ -6,7 +6,7 @@ class AuthMethods{
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   /// CONDITION ? TRUE : FALSE
-  User? _userFromFirebaseUser(FirebaseUser user){
+  User _userFromFirebaseUser(FirebaseUser user){
     return user !=null ?  User(userId: user.uid) : null;
   }
 

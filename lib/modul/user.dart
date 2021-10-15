@@ -2,5 +2,5 @@ class User{
 
   String userId;
 
-  User({required this.userId});
+  User({this.userId});
 }

@@ -1,4 +1,7 @@
+import 'package:animo/services/auth.dart';
+import 'package:animo/view/chatRoomScreen.dart';
 import 'package:animo/widgets/widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -8,9 +11,29 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
+  bool isLoading = false;
+
+  AuthMethods authMethods = new AuthMethods();
+
+  final formKey = GlobalKey<FormState>();
   TextEditingController userNameTextEditingController = new TextEditingController();
   TextEditingController emailNameTextEditingController = new TextEditingController();
   TextEditingController passwordNameTextEditingController = new TextEditingController();
+
+  signMeUp(){
+    if(formKey.currentState.validate()){
+      setState(() {
+        isLoading = true;
+      });
+      
+      authMethods.signUpWithEmailAndPassword(emailNameTextEditingController.text, passwordNameTextEditingController.text).then((val){
+        print("$val.uid");
+        
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChatRoom()
+        ));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +41,9 @@ class _SignUpState extends State<SignUp> {
       appBar: AppBar(
         title: Image.asset("assets/images/logo.png", height: 50,),
       ),
-      body: SingleChildScrollView(
+      body: isLoading ? Container(
+        child: Center(child: CircularProgressIndicator()),
+      ) : SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height - 100,
           alignment: Alignment.bottomCenter,
@@ -27,20 +52,38 @@ class _SignUpState extends State<SignUp> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextField(
-                  controller: userNameTextEditingController,
-                  style: simpleTextStyle(),
-                  decoration: textFieldInputDecoration("username"),
-                ),
-                TextField(
-                  controller: emailNameTextEditingController,
-                  style: simpleTextStyle(),
-                  decoration: textFieldInputDecoration("email"),
-                ),
-                TextField(
-                  controller: passwordNameTextEditingController,
-                  style: simpleTextStyle(),
-                  decoration: textFieldInputDecoration("password"),
+                Form(
+                  key: formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: userNameTextEditingController,
+                          style: simpleTextStyle(),
+                          validator: (val){
+                            return val.isEmpty || val.length < 3 ? "Enter Username 3+ characters" : null;
+                          },
+                          decoration: textFieldInputDecoration("username"),
+                        ),
+                        TextFormField(
+                          controller: emailNameTextEditingController,
+                          style: simpleTextStyle(),
+                          validator: (val){
+                            return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val) ?
+                            null : "Enter correct email";
+                          },
+                          decoration: textFieldInputDecoration("email"),
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          controller: passwordNameTextEditingController,
+                          style: simpleTextStyle(),
+                          decoration: textFieldInputDecoration("password"),
+                          validator:  (val){
+                            return val.length < 6 ? "Enter Password 6+ characters" : null;
+                          },
+                        ),
+                      ],
+                    ),
                 ),
                 SizedBox(height: 8,),
                 Container(
@@ -51,20 +94,25 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 SizedBox(height: 8,),
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color(0xff007EF4),
-                        const Color(0xff2A75BC)
-                      ],
+                GestureDetector(
+                  onTap: (){
+                    signMeUp();
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color(0xff007EF4),
+                          const Color(0xff2A75BC)
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    borderRadius: BorderRadius.circular(30),
+                    child: Text("Sign Up", style: simpleTextStyle(),),
                   ),
-                  child: Text("Sign Up", style: simpleTextStyle(),),
                 ),
                 SizedBox(height: 16,),
                 Container(
