@@ -1,3 +1,4 @@
+import 'package:animo/authenticate.dart';
 import 'package:animo/services/auth.dart';
 import 'package:animo/view/signin.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _ChatRoomState extends State<ChatRoom> {
             onTap: (){
               authMethods.signOut();
               Navigator.pushReplacement(context, MaterialPageRoute(
-                builder: (context) => SignIn(),
+                builder: (context) => Authenticate()
               ));
             },
           ),
@@ -30,6 +31,12 @@ class _ChatRoomState extends State<ChatRoom> {
             child: Icon(Icons.exit_to_app),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: (){
+          
+        },
       ),
     );
   }
