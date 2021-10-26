@@ -12,7 +12,7 @@ class _homeScreenState extends State<homeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
-        backgroundColor: Colors.teal[700],
+        //backgroundColor: Colors.teal[700],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -30,7 +30,10 @@ class _homeScreenState extends State<homeScreen> {
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(vertical: 20),
               decoration: BoxDecoration(
-                color: Colors.white,
+                border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: GestureDetector(
@@ -39,7 +42,7 @@ class _homeScreenState extends State<homeScreen> {
                   ));
                 },
                 child: Text("Konsultasi", style: TextStyle(
-                    color: Colors.black87,
+                    color: Colors.white,
                     fontSize: 18,
                   ),),
               ),
@@ -50,7 +53,10 @@ class _homeScreenState extends State<homeScreen> {
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(vertical: 20),
               decoration: BoxDecoration(
-                color: Colors.white,
+                border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: GestureDetector(
@@ -59,7 +65,7 @@ class _homeScreenState extends State<homeScreen> {
                   ));
                 },
                 child: Text("Pet Shop Terdekat", style: TextStyle(
-                    color: Colors.black87,
+                    color: Colors.white,
                     fontSize: 18,
                   ),),
               ),

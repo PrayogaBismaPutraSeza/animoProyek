@@ -22,7 +22,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome"),
-        backgroundColor: Colors.teal[700],
+        //backgroundColor: Colors.teal[700],
       ),
       body: Container(
         decoration: BoxDecoration(
