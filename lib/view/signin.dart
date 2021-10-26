@@ -1,3 +1,6 @@
+import 'package:animo/view/chatRoomScreen.dart';
+import 'package:animo/view/home.dart';
+import 'package:animo/view/search.dart';
 import 'package:animo/widgets/widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +61,13 @@ class _SignInState extends State<SignIn> {
                     ),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Text("Sign In", style: simpleTextStyle(),),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => homeScreen()
+                      ));
+                    },
+                    child: Text("Sign In", style: simpleTextStyle(),)
+                  ),
                 ),
                 SizedBox(height: 16,),
                 Container(
