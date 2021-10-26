@@ -12,15 +12,19 @@ class _homeScreenState extends State<homeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
+        backgroundColor: Colors.teal[700],
       ),
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage ("assets/images/bg.jpg"),
+            fit: BoxFit.cover
+          ),
+        ),
         padding: EdgeInsets.symmetric(horizontal: 60),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 100,),
-            Image.asset("assets/images/logo.png", height: 80,),
-            SizedBox(height: 100,),
             Container(
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
