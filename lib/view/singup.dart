@@ -1,4 +1,5 @@
 import 'package:animo/services/auth.dart';
+import 'package:animo/services/database.dart';
 import 'package:animo/view/chatRoomScreen.dart';
 import 'package:animo/widgets/widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,6 +18,7 @@ class _SignUpState extends State<SignUp> {
   bool isLoading = false;
 
   AuthMethods authMethods = new AuthMethods();
+  DatabaseMethods databaseMethods = new DatabaseMethods();
 
   final formKey = GlobalKey<FormState>();
   TextEditingController userNameTextEditingController = new TextEditingController();
@@ -30,8 +32,14 @@ class _SignUpState extends State<SignUp> {
       });
       
       authMethods.signUpWithEmailAndPassword(emailNameTextEditingController.text, passwordNameTextEditingController.text).then((val){
-        print("$val.uid");
-        
+        //print("$val.uid");
+
+      Map<String, String> userInfoMap = {
+        "name" : userNameTextEditingController.text,
+        "email" : emailNameTextEditingController.text
+      };
+
+      databaseMethods.uploadUserInfo(userInfoMap);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChatRoom()
         ));
       });
