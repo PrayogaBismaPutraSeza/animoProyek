@@ -1,3 +1,5 @@
+import 'package:animo/authenticate.dart';
+import 'package:animo/services/auth.dart';
 import 'package:animo/view/chatRoomScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -7,11 +9,28 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
+
+  AuthMethods authMethods = new AuthMethods();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
+        actions: [
+          GestureDetector(
+            onTap: (){
+              authMethods.signOut();
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                builder: (context) => Authenticate()
+              ));
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(Icons.exit_to_app)
+            ),
+          ),
+        ],
         //backgroundColor: Colors.teal[700],
       ),
       body: Container(

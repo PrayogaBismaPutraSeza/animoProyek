@@ -1,6 +1,7 @@
 import 'package:animo/services/auth.dart';
 import 'package:animo/services/database.dart';
 import 'package:animo/view/chatRoomScreen.dart';
+import 'package:animo/view/home.dart';
 import 'package:animo/widgets/widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _SignUpState extends State<SignUp> {
       };
 
       databaseMethods.uploadUserInfo(userInfoMap);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChatRoom()
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => homeScreen()
         ));
       });
     }
@@ -122,14 +123,12 @@ class _SignUpState extends State<SignUp> {
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.symmetric(vertical: 20),
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            const Color(0xff007EF4),
-                            const Color(0xff2A75BC)
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
                       ),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                       child: Text("Sign Up", style: simpleTextStyle(),),
                     ),
                   ),
@@ -139,11 +138,14 @@ class _SignUpState extends State<SignUp> {
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.symmetric(vertical: 20),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Text("Sign Up with Google", style: TextStyle(
-                      color: Colors.black87,
+                      color: Colors.white,
                       fontSize: 16,
                     ),),
                   ),
@@ -159,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: 8),
                           child: Text("Sign In now",style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.blue,
                               fontSize: 17,
                               decoration: TextDecoration.underline
                           ),),

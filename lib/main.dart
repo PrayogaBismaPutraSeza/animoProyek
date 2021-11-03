@@ -1,5 +1,4 @@
 import 'package:animo/authenticate.dart';
-import 'package:animo/view/singup.dart';
 import 'package:flutter/material.dart';
 
 void main() {

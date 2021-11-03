@@ -1,6 +1,3 @@
-import 'dart:html';
-
-import 'package:animo/main.dart';
 import 'package:animo/services/database.dart';
 import 'package:animo/widgets/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,11 +26,11 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   /// Create chatroom, send user to conversation screen, pushreplacement
-  createChatRoomAndStartConversation(String userName){
+  //createChatRoomAndStartConversation(String userName){
     
-    List<String> users = [userName,];
-    databaseMethods.createChatRoom();
-  }
+  //  List<String> users = [userName,];
+  //  databaseMethods.createChatRoom();
+  //}
 
   Widget searchList(){
     return searchSnapshot != null ? ListView.builder(
@@ -67,10 +64,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: [
                   Expanded(
                     child: TextField(
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                         hintText: "search doctor",
-                        hintStyle: TextStyle(color: Colors.white),
+                        hintStyle: TextStyle(color: Colors.black),
                         border: InputBorder.none
                       ),
                     )

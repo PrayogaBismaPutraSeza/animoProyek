@@ -45,6 +45,8 @@ class _SignInState extends State<SignIn> {
                     decoration: textFieldInputDecoration("email"),
                   ),
                   TextField(
+                    obscureText: true,
+                    style: simpleTextStyle(),
                     decoration: textFieldInputDecoration("password"),
                     ),
                   SizedBox(height: 8,),
@@ -52,7 +54,10 @@ class _SignInState extends State<SignIn> {
                     alignment: Alignment.centerRight,
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-                      child: Text("Forgot Password?", style: simpleTextStyle(),),
+                      child: Text("Forgot Password?", style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 16,
+                    ),),
                     ),
                   ),
                   SizedBox(height: 8,),
@@ -104,7 +109,7 @@ class _SignInState extends State<SignIn> {
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: 8),
                           child: Text("Register now",style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.blue,
                             fontSize: 17,
                             decoration: TextDecoration.underline
                           ),),
