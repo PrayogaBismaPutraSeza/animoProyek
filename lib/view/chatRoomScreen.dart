@@ -1,4 +1,4 @@
-import 'package:animo/authenticate.dart';
+import 'package:animo/helper/authenticate.dart';
 import 'package:animo/services/auth.dart';
 import 'package:animo/view/search.dart';
 import 'package:animo/view/signin.dart';

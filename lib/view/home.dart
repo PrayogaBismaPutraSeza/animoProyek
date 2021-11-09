@@ -1,4 +1,4 @@
-import 'package:animo/authenticate.dart';
+import 'package:animo/helper/authenticate.dart';
 import 'package:animo/services/auth.dart';
 import 'package:animo/view/chatRoomScreen.dart';
 import 'package:flutter/material.dart';

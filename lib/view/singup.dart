@@ -1,3 +1,4 @@
+import 'package:animo/helper/helperfunctions.dart';
 import 'package:animo/services/auth.dart';
 import 'package:animo/services/database.dart';
 import 'package:animo/view/chatRoomScreen.dart';
@@ -20,6 +21,7 @@ class _SignUpState extends State<SignUp> {
 
   AuthMethods authMethods = new AuthMethods();
   DatabaseMethods databaseMethods = new DatabaseMethods();
+  HelperFunctions helperFunctions = new HelperFunctions();
 
   final formKey = GlobalKey<FormState>();
   TextEditingController userNameTextEditingController = new TextEditingController();
@@ -28,6 +30,15 @@ class _SignUpState extends State<SignUp> {
 
   signMeUp(){
     if(formKey.currentState.validate()){
+
+      Map<String, String> userInfoMap = {
+        "name" : userNameTextEditingController.text,
+        "email" : emailNameTextEditingController.text
+      };
+
+      HelperFunctions.saveUserEmailSharedPreference(emailNameTextEditingController.text);
+      HelperFunctions.saveUserNameSharedPreference(userNameTextEditingController.text);
+      
       setState(() {
         isLoading = true;
       });
@@ -35,14 +46,10 @@ class _SignUpState extends State<SignUp> {
       authMethods.signUpWithEmailAndPassword(emailNameTextEditingController.text, passwordNameTextEditingController.text).then((val){
         //print("$val.uid");
 
-      Map<String, String> userInfoMap = {
-        "name" : userNameTextEditingController.text,
-        "email" : emailNameTextEditingController.text
-      };
-
-      databaseMethods.uploadUserInfo(userInfoMap);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => homeScreen()
-        ));
+        databaseMethods.uploadUserInfo(userInfoMap);
+        HelperFunctions.saveUserLoggedInSharedPreference(true);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => homeScreen()
+          ));
       });
     }
   }

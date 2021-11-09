@@ -1,5 +1,6 @@
-import 'package:animo/authenticate.dart';
 import 'package:flutter/material.dart';
+
+import 'helper/authenticate.dart';
 
 void main() {
   runApp(MyApp());

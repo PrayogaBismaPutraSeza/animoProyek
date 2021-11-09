@@ -8,6 +8,12 @@ class DatabaseMethods{
       .getDocuments();
   }
 
+  getUserByUserEmail(String userEmail) async {
+    return await Firestore.instance.collection("users")
+      .where("Email", isEqualTo: userEmail )
+      .getDocuments();
+  }
+
   uploadUserInfo(userMap){
     Firestore.instance.collection("users")
     .add(userMap).catchError((e){
