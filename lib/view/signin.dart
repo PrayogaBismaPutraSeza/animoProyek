@@ -130,13 +130,7 @@ class _SignInState extends State<SignIn> {
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => homeScreen()
-                          ));
-                        },
-                        child: Text("Sign In", style: simpleTextStyle(),)
-                      ),
+                      child: Text("Sign In", style: simpleTextStyle(),),
                     ),
                   ),
                   SizedBox(height: 16,),
