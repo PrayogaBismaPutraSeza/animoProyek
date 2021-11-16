@@ -1,4 +1,6 @@
 import 'package:animo/helper/authenticate.dart';
+import 'package:animo/helper/constants.dart';
+import 'package:animo/helper/helperfunctions.dart';
 import 'package:animo/services/auth.dart';
 import 'package:animo/view/search.dart';
 import 'package:animo/view/signin.dart';
@@ -11,7 +13,20 @@ class ChatRoom extends StatefulWidget {
 
 class _ChatRoomState extends State<ChatRoom> {
 
-  AuthMethods authMethods = new AuthMethods(); 
+  AuthMethods authMethods = new AuthMethods();
+
+  @override
+  void initState(){
+    getUserInfo();
+    super.initState();
+  }
+
+  getUserInfo() async {
+    Constants.myName = await HelperFunctions.getUserNameSharedPreference();
+   setState(() {
+
+   });
+  }
 
   @override
   Widget build(BuildContext context) {
