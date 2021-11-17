@@ -39,8 +39,8 @@ class _SearchScreenState extends State<SearchScreen> {
         .getUserByUsername(searchEditingController.text)
         .then((val){
       setState(() {
-              searchSnapshot = val;
-            });
+        searchSnapshot = val;
+      });
     });
   }
 
@@ -75,8 +75,8 @@ class _SearchScreenState extends State<SearchScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(userName, style: mediumTextStyle(),),
-              Text(userEMail, style: mediumTextStyle(),),
+              Text(userName, style: TextStyle(color: Colors.black,fontSize: 17 ),),
+              Text(userEMail, style: TextStyle(color: Colors.black,fontSize: 17 ),),
             ],
           ),
           Spacer(),
@@ -105,8 +105,6 @@ class _SearchScreenState extends State<SearchScreen> {
       super.initState();
     }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,9 +119,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: [
                   Expanded(
                     child: TextField(
+                      controller: searchEditingController,
                       style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
-                        hintText: "search doctor",
+                        hintText: "search doctor...",
                         hintStyle: TextStyle(color: Colors.black),
                         border: InputBorder.none
                       ),

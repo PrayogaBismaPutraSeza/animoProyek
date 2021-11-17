@@ -29,14 +29,8 @@ class _SignInState extends State<SignIn> {
   QuerySnapshot snapshotUserInfo;
 
   signIn(){
-
     if (formKey.currentState.validate()) {
-      
       HelperFunctions.saveUserEmailSharedPreference(emailNameTextEditingController.text);
-
-      setState(() {
-        isLoading = true;
-      });
 
       databaseMethods.getUserByUserEmail(emailNameTextEditingController.text)
       .then((val){
@@ -45,8 +39,14 @@ class _SignInState extends State<SignIn> {
         //print("${snapshotUserInfo.documents[0].data['name']}");
       });
 
+      setState(() {
+        isLoading = true;
+      });
+
       authMethods.signInWithEmailAndPassword(emailNameTextEditingController.text, passwordNameTextEditingController.text).then((val){
         if (val != null) {
+
+          
           HelperFunctions.saveUserLoggedInSharedPreference(true);
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => homeScreen()
           ));
