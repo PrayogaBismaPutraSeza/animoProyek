@@ -39,6 +39,7 @@ class DatabaseMethods{
     return await Firestore.instance.collection("ChatRoom")
       .document(chatRoomId)
       .collection("chats")
+      .orderBy("time")
       .snapshots();
   }
 
