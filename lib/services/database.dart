@@ -27,4 +27,19 @@ class DatabaseMethods{
         print(e.toString());
       });
   }
+
+  addConversationMessages(String chatRoomId, messageMap){
+    Firestore.instance.collection("ChatRoom")
+      .document(chatRoomId)
+      .collection("chats")
+      .add(messageMap).catchError((e){print(e.toString());});
+  }
+
+  getConversationMessages(String chatRoomId) async{
+    return await Firestore.instance.collection("ChatRoom")
+      .document(chatRoomId)
+      .collection("chats")
+      .snapshots();
+  }
+
 }
