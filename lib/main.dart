@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  bool userIsLoggedIn;
+  bool userIsLoggedIn = false;
 
   @override
   void initState() {
@@ -42,13 +42,8 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-        home: userIsLoggedIn != null ?  userIsLoggedIn ? ChatRoom() : Authenticate()
-            : Container(
-        child: Center(
-        child: Authenticate(),
-        ),
-      ),
-    );
+        home: userIsLoggedIn ? ChatRoom() : Authenticate(),
+      );
   }
 }
 

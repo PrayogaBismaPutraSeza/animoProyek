@@ -35,8 +35,9 @@ class _SignInState extends State<SignIn> {
       databaseMethods.getUserByUserEmail(emailNameTextEditingController.text)
       .then((val){
         snapshotUserInfo = val;
-        HelperFunctions.saveUserNameSharedPreference(snapshotUserInfo.documents[0].data['name']);
-        //print("${snapshotUserInfo.documents[0].data['name']}");
+        HelperFunctions
+            .saveUserNameSharedPreference(snapshotUserInfo.documents[0].data["name"]);
+        //print("${snapshotUserInfo.documents[0].data["name"]}");
       });
 
       setState(() {
@@ -45,11 +46,9 @@ class _SignInState extends State<SignIn> {
 
       authMethods.signInWithEmailAndPassword(emailNameTextEditingController.text, passwordNameTextEditingController.text).then((val){
         if (val != null) {
-
-          
           HelperFunctions.saveUserLoggedInSharedPreference(true);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => homeScreen()
-          ));
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => ChatRoom()));
         }
       });
     }

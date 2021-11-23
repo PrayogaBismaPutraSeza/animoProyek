@@ -17,6 +17,7 @@ class AuthMethods{
       return _userFromFirebaseUser(firebaseUser);
     }catch(e){
       print(e.toString());
+      return null;
     }
   }
   Future signUpWithEmailAndPassword(String email, String password) async {
@@ -26,6 +27,7 @@ class AuthMethods{
       return _userFromFirebaseUser(firebaseUser);
     }catch(e){
       print(e.toString());
+      return null;
     }
   }
   Future resetPass(String email) async {
@@ -33,13 +35,15 @@ class AuthMethods{
      return await _auth.sendPasswordResetEmail(email: email);
     }catch(e){
       print(e.toString());
+      return null;
     }
   }
   Future signOut() async {
     try{
       return await _auth.signOut();
     }catch(e){
-
+      print(e.toString());
+      return null;
     }
   }
 }

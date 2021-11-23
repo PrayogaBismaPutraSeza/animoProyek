@@ -21,7 +21,6 @@ class _SearchScreenState extends State<SearchScreen> {
   QuerySnapshot searchSnapshot;
 
 
-
   Widget searchList(){
     return searchSnapshot != null ? ListView.builder(
         itemCount: searchSnapshot.documents.length,
@@ -29,7 +28,7 @@ class _SearchScreenState extends State<SearchScreen> {
         itemBuilder: (context, index){
           return SearchTile(
             userName: searchSnapshot.documents[index].data["name"],
-            userEMail: searchSnapshot.documents[index].data["email"],
+            userEmail: searchSnapshot.documents[index].data["email"],
           );
         }) : Container();
   }
@@ -48,17 +47,18 @@ class _SearchScreenState extends State<SearchScreen> {
 
   /// Create chatroom, send user to conversation screen, pushreplacement
   createChatRoomAndStartConversation({String userName}){
+
     print("${Constants.myName}");
     if(userName != Constants.myName){
       String chatRoomId = getChatRoomId(userName, Constants.myName);
 
       List<String> users = [userName, Constants.myName];
-      Map<String, dynamic> chatRoomMap = {
+      Map<String, dynamic> charRoomMap = {
         "users" : users,
-        "chatroomid" : chatRoomId
+        "chatroomId" : chatRoomId
       };
 
-      DatabaseMethods().createChatRoom(chatRoomId, chatRoomMap);
+      DatabaseMethods().createChatRoom(chatRoomId, charRoomMap);
       Navigator.push(context, MaterialPageRoute(
           builder: (context) => ConversationScreen()
       ));
@@ -67,7 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
-  Widget SearchTile({String userName, String userEMail}){
+  Widget SearchTile({String userName, String userEmail}){
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Row(
@@ -76,7 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(userName, style: TextStyle(color: Colors.black,fontSize: 17 ),),
-              Text(userEMail, style: TextStyle(color: Colors.black,fontSize: 17 ),),
+              Text(userEmail, style: TextStyle(color: Colors.black,fontSize: 17 ),),
             ],
           ),
           Spacer(),
@@ -98,6 +98,14 @@ class _SearchScreenState extends State<SearchScreen> {
         ],
       ),
     );
+  }
+
+  getChatRoomId(String a, String b) {
+    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+      return "$b\_$a";
+    } else {
+      return "$a\_$b";
+    }
   }
 
   @override
@@ -160,13 +168,7 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 
-getChatRoomId(String a, String b) {
-  if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-    return "$b\_$a";
-  } else {
-    return "$a\_$b";
-  }
-}
+
 
 
 
