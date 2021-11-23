@@ -41,12 +41,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-        home: userIsLoggedIn != null ?  userIsLoggedIn ? homeScreen() : Authenticate()
-            : Container(
-        child: Center(
-        child: Authenticate(),
-        ),
-      ),
+        home: userIsLoggedIn ?  homeScreen() : Authenticate(),
     );
   }
 }

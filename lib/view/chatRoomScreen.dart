@@ -3,6 +3,7 @@ import 'package:animo/helper/constants.dart';
 import 'package:animo/helper/helperfunctions.dart';
 import 'package:animo/services/auth.dart';
 import 'package:animo/services/database.dart';
+import 'package:animo/view/conversation_screen.dart';
 import 'package:animo/view/search.dart';
 import 'package:animo/view/signin.dart';
 import 'package:animo/widgets/widget.dart';
@@ -29,7 +30,8 @@ class _ChatRoomState extends State<ChatRoom> {
           itemBuilder: (context, index){
             return ChatRoomTile(
               snapshot.data.documents[index].data["chatroomId"]
-                .toString().replaceAll("_", "").replaceAll(Constants.myName, "")
+                .toString().replaceAll("_", "").replaceAll(Constants.myName, ""),
+              snapshot.data.documents[index].data["chatroomId"]
             );
           }) : Container();
       },
@@ -88,27 +90,36 @@ class _ChatRoomState extends State<ChatRoom> {
 
 class ChatRoomTile extends StatelessWidget {
   final String userName;
-  ChatRoomTile(this.userName);
+  final String chatRoomId;
+  ChatRoomTile(this.userName, this.chatRoomId);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: Row(
-        children: [
-          Container(
-            height: 40,
-            width: 40,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(40)
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => ConversationScreen(chatRoomId)
+        ));
+      },
+      child: Container(
+        color: Colors.teal[200],
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: Row(
+          children: [
+            Container(
+              height: 40,
+              width: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(40)
+              ),
+              child: Text("${userName.substring(0,1).toUpperCase()}", style: mediumTextStyle(),),
             ),
-            child: Text("${userName.substring(0,1).toUpperCase()}", style: mediumTextStyle(),),
-          ),
-          SizedBox(width: 8,),
-          Text(userName, style: mediumTextStyle(),)
-        ],
+            SizedBox(width: 8,),
+            Text(userName, style: mediumTextStyle(),)
+          ],
+        ),
       ),
     );
   }
