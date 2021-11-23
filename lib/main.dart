@@ -1,7 +1,6 @@
 import 'package:animo/helper/helperfunctions.dart';
 import 'package:animo/view/home.dart';
 import 'package:flutter/material.dart';
-
 import 'helper/authenticate.dart';
 
 void main() {
@@ -16,7 +15,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  bool userIsLoggedIn;
+  bool userIsLoggedIn = false;
 
   @override
   void initState() {

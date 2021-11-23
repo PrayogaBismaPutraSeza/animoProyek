@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ConversationScreen extends StatefulWidget {
-
-
   @override
   _ConversationScreenState createState() => _ConversationScreenState();
 }
