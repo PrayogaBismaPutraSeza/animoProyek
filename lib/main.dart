@@ -1,5 +1,5 @@
 import 'package:animo/helper/helperfunctions.dart';
-import 'package:animo/view/chatRoomScreen.dart';
+import 'package:animo/view/home.dart';
 import 'package:flutter/material.dart';
 
 import 'helper/authenticate.dart';
@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-        home: userIsLoggedIn != null ?  userIsLoggedIn ? ChatRoom() : Authenticate()
+        home: userIsLoggedIn != null ?  userIsLoggedIn ? homeScreen() : Authenticate()
             : Container(
         child: Center(
         child: Authenticate(),

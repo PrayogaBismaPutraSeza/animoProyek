@@ -45,8 +45,6 @@ class _SignInState extends State<SignIn> {
 
       authMethods.signInWithEmailAndPassword(emailNameTextEditingController.text, passwordNameTextEditingController.text).then((val){
         if (val != null) {
-
-          
           HelperFunctions.saveUserLoggedInSharedPreference(true);
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => homeScreen()
           ));

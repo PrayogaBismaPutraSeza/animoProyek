@@ -8,7 +8,7 @@ class HelperFunctions{
 
   //saving data to SharedPreference
 
-  static Future<void> saveUserLoggedInSharedPreference
+  static Future<bool> saveUserLoggedInSharedPreference
       (bool isUserLoggedIn) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setBool(sharedPreferenceUserLoggedInKey, isUserLoggedIn);
@@ -17,30 +17,30 @@ class HelperFunctions{
   static Future<bool> saveUserNameSharedPreference
       (String userName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.setString(sharedPreferenceUserLoggedInKey, userName);
+    return await prefs.setString(sharedPreferenceUserNameKey, userName);
   }
 
   static Future<bool> saveUserEmailSharedPreference
       (String userEmail) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.setString(sharedPreferenceUserLoggedInKey, userEmail);
+    return await prefs.setString(sharedPreferenceUserEmailKey, userEmail);
   }
 
   //getting data from SharedPreference
 
   static Future<bool> getUserLoggedInSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return  prefs.getBool(sharedPreferenceUserLoggedInKey);
+    return prefs.getBool(sharedPreferenceUserLoggedInKey);
   }
 
   static Future<String> getUserNameSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return  prefs.getString(sharedPreferenceUserNameKey);
+    return prefs.getString(sharedPreferenceUserNameKey);
   }
 
   static Future<String> getUserEmailSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return  prefs.getString(sharedPreferenceUserEmailKey);
+    return prefs.getString(sharedPreferenceUserEmailKey);
   }       
 }
 

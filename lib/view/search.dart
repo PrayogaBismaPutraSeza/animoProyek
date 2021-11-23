@@ -11,7 +11,7 @@ class SearchScreen extends StatefulWidget {
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-String _myName;
+  String _myName;
 
 class _SearchScreenState extends State<SearchScreen> {
 
@@ -19,7 +19,6 @@ class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchEditingController = new TextEditingController();
 
   QuerySnapshot searchSnapshot;
-
 
 
   Widget searchList(){
@@ -48,8 +47,10 @@ class _SearchScreenState extends State<SearchScreen> {
 
   /// Create chatroom, send user to conversation screen, pushreplacement
   createChatRoomAndStartConversation({String userName}){
+
     print("${Constants.myName}");
     if(userName != Constants.myName){
+      
       String chatRoomId = getChatRoomId(userName, Constants.myName);
 
       List<String> users = [userName, Constants.myName];
@@ -63,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
           builder: (context) => ConversationScreen()
       ));
     } else {
-      print("you cannot send message to yourself");
+        print("you cannot send message to yourself");
     }
   }
 
@@ -104,6 +105,7 @@ class _SearchScreenState extends State<SearchScreen> {
     void initState() {
       super.initState();
     }
+
 
   @override
   Widget build(BuildContext context) {
