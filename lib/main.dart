@@ -33,15 +33,21 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Chat',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.teal[700],
         scaffoldBackgroundColor: Colors.teal[100],
         primarySwatch: Colors.teal,
+        fontFamily: "OverpassRegular",
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-        home: userIsLoggedIn ?  homeScreen() : Authenticate(),
+      home: userIsLoggedIn != null ?  userIsLoggedIn ? homeScreen() : Authenticate()
+          : Container(
+        child: Center(
+          child: Authenticate(),
+        ),
+      ),
     );
   }
 }

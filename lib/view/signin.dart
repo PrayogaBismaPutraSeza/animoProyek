@@ -9,8 +9,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'forgetpassword.dart';
+
 class SignIn extends StatefulWidget {
   final Function toggle;
+
   SignIn(this.toggle);
 
   @override 
@@ -22,33 +25,35 @@ class _SignInState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
   AuthMethods authMethods = new AuthMethods();
   DatabaseMethods databaseMethods = new DatabaseMethods();
-  TextEditingController emailNameTextEditingController = new TextEditingController();
-  TextEditingController passwordNameTextEditingController = new TextEditingController();
+  TextEditingController emailTextEditingController = new TextEditingController();
+  TextEditingController passwordTextEditingController = new TextEditingController();
 
   bool isLoading = false;
-  QuerySnapshot snapshotUserInfo;
 
-  signIn(){
+  signIn()async{
     if (formKey.currentState.validate()) {
-      HelperFunctions.saveUserEmailSharedPreference(emailNameTextEditingController.text);
-
-      databaseMethods.getUserByUserEmail(emailNameTextEditingController.text)
-      .then((val){
-        snapshotUserInfo = val;
-        HelperFunctions
-            .saveUserNameSharedPreference(snapshotUserInfo.documents[0].data["name"]);
-        //print("${snapshotUserInfo.documents[0].data["name"]}");
-      });
-
       setState(() {
         isLoading = true;
       });
 
-      authMethods.signInWithEmailAndPassword(emailNameTextEditingController.text, passwordNameTextEditingController.text).then((val){
-        if (val != null) {
+      await authMethods.signInWithEmailAndPassword(emailTextEditingController.text, passwordTextEditingController.text).then((result) async{
+        if (result != null) {
+          QuerySnapshot userInfoSnapshot =
+              await DatabaseMethods().getUserByUserEmail(emailTextEditingController.text);
+
           HelperFunctions.saveUserLoggedInSharedPreference(true);
+          HelperFunctions.saveUserNameSharedPreference(
+              userInfoSnapshot.documents[0].data["name"]);
+          HelperFunctions.saveUserEmailSharedPreference(
+              userInfoSnapshot.documents[0].data["email"]);
+
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => homeScreen()));
+        }else{
+          setState(() {
+            isLoading = false;
+            //show snackbar
+          });
         }
       });
     }
@@ -61,7 +66,11 @@ class _SignInState extends State<SignIn> {
         title: Text("Welcome"),
         //backgroundColor: Colors.teal[700],
       ),
-      body: Container(
+      body: isLoading
+      ? Container(
+        child: Center(child: CircularProgressIndicator()),
+      ) 
+      : Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage ("assets/images/bg.jpg"),
@@ -77,6 +86,7 @@ class _SignInState extends State<SignIn> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Spacer(),
                   Form(
                     key: formKey,
                     child: Column(
@@ -86,7 +96,7 @@ class _SignInState extends State<SignIn> {
                             return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val) ?
                             null : "Enter correct email";
                           },
-                          controller: emailNameTextEditingController,
+                          controller: emailTextEditingController,
                           style: simpleTextStyle(),
                           decoration: textFieldInputDecoration("email"),
                         ),
@@ -94,7 +104,7 @@ class _SignInState extends State<SignIn> {
                           validator:  (val){
                             return val.length < 6 ? "Enter Password 6+ characters" : null;
                           },
-                          controller: passwordNameTextEditingController,
+                          controller: passwordTextEditingController,
                           obscureText: true,
                           style: simpleTextStyle(),
                           decoration: textFieldInputDecoration("password"),
@@ -103,15 +113,28 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   SizedBox(height: 8,),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-                      child: Text("Forgot Password?", style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 16,
-                    ),),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ForgotPassword()));
+                        },
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                            child: Text("Forgot Password?", style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 16,
+                          ),),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 8,),
                   GestureDetector(

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:animo/modul/user.dart';
 
 class AuthMethods{
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   /// CONDITION ? TRUE : FALSE
@@ -12,7 +11,8 @@ class AuthMethods{
 
   Future signInWithEmailAndPassword(String email, String password) async {
     try{
-      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      AuthResult result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       FirebaseUser firebaseUser = result.user;
       return _userFromFirebaseUser(firebaseUser);
     }catch(e){
@@ -22,7 +22,8 @@ class AuthMethods{
   }
   Future signUpWithEmailAndPassword(String email, String password) async {
     try{
-      AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      AuthResult result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       FirebaseUser firebaseUser = result.user;
       return _userFromFirebaseUser(firebaseUser);
     }catch(e){

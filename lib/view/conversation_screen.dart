@@ -25,7 +25,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
         return snapshot.hasData ? ListView.builder(
           itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index){
-            return MessageTile(snapshot.data.documents[index].data["message"], snapshot.data.documents[index].data["sendBy"] == Constants.myName);
+            return MessageTile(
+              message: snapshot.data.documents[index].data["message"], 
+              isSendByMe: snapshot.data.documents[index].data["sendBy"] == Constants.myName);
           }) : Container();
       },
     );
@@ -39,7 +41,10 @@ class _ConversationScreenState extends State<ConversationScreen> {
       "time"  : DateTime.now().millisecondsSinceEpoch
     };
     databaseMethods.addConversationMessages(widget.chatRoomId, messageMap);
-    messageController.text = "";
+
+    setState(() {
+        messageController.text = "";
+      });
     }
   }
 
@@ -63,6 +68,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
             ChatMessageList(),
             Container(
               alignment: Alignment.bottomCenter,
+              width: MediaQuery.of(context).size.width,
               child: Container(
                 color: Color(0x54FFFFFF),
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -91,7 +97,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
                             colors: [
                               const Color(0x36FFFFFF),
                               const Color(0x0FFFFFFF)
-                            ]
+                            ],
+                            begin: FractionalOffset.topLeft,
+                            end: FractionalOffset.bottomRight
                           ),
                           borderRadius: BorderRadius.circular(40)
                         ),
@@ -113,12 +121,12 @@ class _ConversationScreenState extends State<ConversationScreen> {
 class MessageTile extends StatelessWidget {
   final String message;
   final bool isSendByMe;
-  MessageTile(this.message, this.isSendByMe);
+  MessageTile({@required this.message, @required this.isSendByMe});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: isSendByMe ?  0 : 24, right: isSendByMe ? 24 : 0),
+      padding: EdgeInsets.only(top: 8, bottom : 8, left: isSendByMe ?  0 : 24, right: isSendByMe ? 24 : 0),
       margin: EdgeInsets.symmetric(vertical: 8),
       width: MediaQuery.of(context).size.width,
       alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
