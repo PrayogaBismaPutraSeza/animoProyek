@@ -1,6 +1,7 @@
 import 'package:animo/helper/authenticate.dart';
 import 'package:animo/services/auth.dart';
 import 'package:animo/view/chatRoomScreen.dart';
+import 'package:animo/view/maps.dart';
 import 'package:flutter/material.dart';
 
 class homeScreen extends StatefulWidget {
@@ -80,7 +81,7 @@ class _homeScreenState extends State<homeScreen> {
               ),
               child: GestureDetector(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChatRoom()
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MapsPage()
                   ));
                 },
                 child: Text("Pet Shop Terdekat", style: TextStyle(
