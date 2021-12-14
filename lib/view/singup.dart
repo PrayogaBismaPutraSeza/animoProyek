@@ -112,15 +112,7 @@ class _SignUpState extends State<SignUp> {
                         ],
                       ),
                   ),
-                  SizedBox(height: 8,),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-                      child: Text("Forgot Password?", style: simpleTextStyle(),),
-                    ),
-                  ),
-                  SizedBox(height: 8,),
+                  SizedBox(height: 30,),
                   GestureDetector(
                     onTap: (){
                       signMeUp();
@@ -138,23 +130,6 @@ class _SignUpState extends State<SignUp> {
                     ),
                       child: Text("Sign Up", style: simpleTextStyle(),),
                     ),
-                  ),
-                  SizedBox(height: 16,),
-                  Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Text("Sign Up with Google", style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),),
                   ),
                   SizedBox(height: 16,),
                   Row(

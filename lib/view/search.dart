@@ -35,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   initiateSearch(){
     databaseMethods
-        .getUserByUsername(searchEditingController.text)
+        .getUserByUsername("Bisma")
         .then((val){
       setState(() {
         searchSnapshot = val;
@@ -129,17 +129,17 @@ class _SearchScreenState extends State<SearchScreen> {
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Row(
                 children: [
-                  Expanded(
-                    child: TextField(
-                      controller: searchEditingController,
-                      style: TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                        hintText: "search doctor...",
-                        hintStyle: TextStyle(color: Colors.black),
-                        border: InputBorder.none
-                      ),
-                    )
-                  ),
+                  // Expanded(
+                  //   child: TextField(
+                  //     controller: searchEditingController,
+                  //     style: TextStyle(color: Colors.black),
+                  //     decoration: InputDecoration(
+                  //       hintText: "search doctor...",
+                  //       hintStyle: TextStyle(color: Colors.black),
+                  //       border: InputBorder.none
+                  //     ),
+                  //   )
+                  // ),
                   GestureDetector(
                     onTap: (){
                       initiateSearch();
