@@ -35,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   initiateSearch(){
     databaseMethods
-        .getUserByUsername("Bisma")
+        .getUserByUsername("Dokter")
         .then((val){
       setState(() {
         searchSnapshot = val;
