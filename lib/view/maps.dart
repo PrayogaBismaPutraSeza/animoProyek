@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -10,6 +11,35 @@ class MapsPage extends StatefulWidget {
 class _MapsPageState extends State<MapsPage> {
 
   GoogleMapController myController;
+  Map<MarkerId , Marker> markers = <MarkerId , Marker>{};
+
+  void initMarker(spesify, specifyId) async {
+    var markerIdVal = specifyId;
+    final MarkerId markerId = MarkerId(markerIdVal);
+    final Marker marker = Marker(
+        markerId: markerId,
+        position: LatLng(spesify['location'].latitude, spesify['location'].longitude),
+        infoWindow: InfoWindow(title: 'shops', snippet: spesify['address'])
+    );
+    setState(() {
+      markers[markerId] = marker;
+    });
+  }
+
+  getMarkerData() async{
+    Firestore.instance.collection('data').getDocuments().then((myMockData){
+      if(myMockData.documents.isNotEmpty){
+        for(int i = 0; i < myMockData.documents.length ; i++)
+        initMarker(myMockData.documents[i].data, myMockData.documents[i].documentID);
+      }
+    });
+  }
+
+  void initState(){
+    getMarkerData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Set<Marker> getMarker(){
